@@ -12,24 +12,23 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
+@login_required(login_url=reverse_lazy('accountapp:login'))
 def hello_world(request):
-    if request.user.is_authenticated:
-      if request.method == "POST":
+    if request.method == "POST":
 
-         temp = request.POST.get('input')
+        temp = request.POST.get('input')
 
-         new_data = HelloWorld()
-         new_data.text = temp
-         new_data.save()
+        new_data = HelloWorld()
+        new_data.text = temp
+        new_data.save()
 
-         return HttpResponseRedirect(reverse('accountapp:hello_world'))
+        return HttpResponseRedirect(reverse('accountapp:hello_world'))
 
-      else:
-         data_list = HelloWorld.objects.all()
-         return render(request, 'accountapp/hello_world.html',
-                          context={'data_list': data_list})
     else:
-        return HttpResponseRedirect(reverse('accountapp:login'))
+        data_list = HelloWorld.objects.all()
+        return render(request, 'accountapp/hello_world.html',
+                      context={'data_list': data_list})
+
 
 class AccountCreateView(CreateView):
     model = User
