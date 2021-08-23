@@ -1,5 +1,5 @@
 <div style="text-align: center">
-    <div class="pragmatic_header_logo" >
+    <div class="pragmatic_header_logo">
         <h1>Pragmatic</h1>
     </div>
     <div class="pragmatic_header_button">
@@ -13,9 +13,15 @@
                 Projects
             </a>
         </span>
+        {% if user.is_authenticated %}
+        <span>
+            <a href="{% url 'subscribeapp:list' %}">
+                Subscription
+            </a>
+        </span>
+        {% endif %}
 
-        {% if not user.is_authenticated %}
-
+        {% if not user.is_authenticated  %}
         <span>
             <a href="{% url 'accountapp:login' %}">
                 Login
@@ -23,21 +29,20 @@
         </span>
         <span>
             <a href="{% url 'accountapp:create' %}">
-                SighUp
+                SignUp
             </a>
         </span>
         {% else %}
         <span>
-           <a href="{% url 'accountapp:detail' pk=user.pk %}">
-               MyPage
-           </a>
+            <a href="{% url 'accountapp:detail' pk=user.pk %}">
+                MyPage
+            </a>
         </span>
         <span>
-           <a href="{% url 'accountapp:logout' %}">
-               Logout
-           </a>
+            <a href="{% url 'accountapp:logout' %}">
+                Logout
+            </a>
         </span>
         {% endif %}
     </div>
-
 </div>
