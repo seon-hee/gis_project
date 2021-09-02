@@ -2,9 +2,9 @@ FROM python:3.9.0
 
 WORKDIR /home/
 
-RUN git clone https://github.com/seon-hee/gis_2ban.git
+RUN git clone https://github.com/seon-hee/gis_project.git
 
-WORKDIR /home/gis_2ban/
+WORKDIR /home/gis_project/
 
 RUN echo "SECRET_KEY=django-insecure-n!$+f+(v--7x2l_8ivs$t)g!y2@qs-sn0gdj6mxzb#q91fx^d9" > .env
 
