@@ -10,8 +10,10 @@ RUN echo "SECRET_KEY=django-insecure-n!$+f+(v--7x2l_8ivs$t)g!y2@qs-sn0gdj6mxzb#q
 
 RUN pip install -r requirements.txt
 
+RUN pip install gunicorn
+
 RUN python manage.py migrate
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "gis_project.wsgi", "--bind", "0.0.0.0:8000"]
