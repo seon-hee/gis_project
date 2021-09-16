@@ -13,12 +13,24 @@ services:
     - 80:80
 
   django:
-    image: gis_test_image:3
+    image: gis_test_image:4
     networks:
       - gis_2ban_network
     volumes:
       - media:/home/gis_project/media/
       - static:/home/gis_project/staticfiles/
+
+  mariadb:
+    image: mariadb:10.5
+    networks:
+      - gis_2ban_network
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: django
+      MARIADB_USER: django
+      MARIADB_PASSWORD: qwer1
+      MARIADB_ROOT_PASSWORD: qwer1
 
 networks:
   gis_2ban_network:
@@ -26,3 +38,4 @@ networks:
 volumes:
   media:
   static:
+  mariadb:
